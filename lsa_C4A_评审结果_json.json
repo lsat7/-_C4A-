@@ -1,0 +1,1410 @@
+{
+  "meta": {
+    "version": "1.0",
+    "mode": "纯规则（确定性）",
+    "generated_at": "2026-10-05 12:03:34",
+    "folder": "C:\\Users\\Administrator\\WorkBuddy\\挑战资料包\\work\\c4a_test_batch",
+    "n_files": 30
+  },
+  "results": [
+    {
+      "author": "chenyu",
+      "n_files": 5,
+      "files": [
+        {
+          "path": "chenyu_C4_AI日志_v2.md",
+          "ext": ".md",
+          "size_kb": 0.3,
+          "modified": "2026-10-05",
+          "version": 2
+        },
+        {
+          "path": "chenyu_C4_skill说明_v1.md",
+          "ext": ".md",
+          "size_kb": 0.2,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "chenyu_C4_skill说明_v2.md",
+          "ext": ".md",
+          "size_kb": 1.0,
+          "modified": "2026-10-05",
+          "version": 2
+        },
+        {
+          "path": "chenyu_C4_weekly_report_v2.py",
+          "ext": ".py",
+          "size_kb": 1.2,
+          "modified": "2026-10-05",
+          "version": 2
+        },
+        {
+          "path": "chenyu_C4_教学说明_v2.md",
+          "ext": ".md",
+          "size_kb": 0.5,
+          "modified": "2026-10-05",
+          "version": 2
+        }
+      ],
+      "author_method": [
+        "filename_prefix"
+      ],
+      "completeness": {
+        "slots": {
+          "skill_doc": {
+            "label": "Skill 说明文档",
+            "present": true,
+            "matched_file": "chenyu_C4_skill说明_v2.md",
+            "confidence": 3
+          },
+          "executable_content": {
+            "label": "可执行内容",
+            "present": true,
+            "matched_file": "chenyu_C4_skill说明_v1.md",
+            "confidence": 3
+          },
+          "demo": {
+            "label": "Demo（视频/截图）",
+            "present": false,
+            "matched_file": null,
+            "confidence": 0
+          },
+          "teaching_doc": {
+            "label": "教学说明",
+            "present": true,
+            "matched_file": "chenyu_C4_教学说明_v2.md",
+            "confidence": 3
+          },
+          "ai_log": {
+            "label": "AI 日志",
+            "present": true,
+            "matched_file": "chenyu_C4_AI日志_v2.md",
+            "confidence": 3
+          }
+        },
+        "present": 4,
+        "total": 5,
+        "status": "partial",
+        "score": 0.8,
+        "missing": [
+          "Demo（视频/截图）"
+        ],
+        "low_confidence": []
+      },
+      "quality": {
+        "criteria": {
+          "reusable": {
+            "id": "reusable",
+            "label": "可复用",
+            "label_en": "Reusable",
+            "raw": 1.0,
+            "rating": "pass",
+            "icon": "✅",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "install_instructions",
+                "desc": "文档包含安装/使用步骤说明",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 2/2 个信号：安装, 使用步骤",
+                "skipped": false
+              },
+              {
+                "id": "no_hardcoded_env",
+                "desc": "不含作者本机绝对路径 / 硬编码凭证（负向信号）",
+                "kind": "must_avoid",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "检出 0 处负向信号（无，合规）",
+                "skipped": false
+              },
+              {
+                "id": "env_requirements",
+                "desc": "声明环境/依赖要求",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 6/1 个信号：环境要求, 依赖, python 3, 无第三方, 零依赖, 标准库",
+                "skipped": false
+              },
+              {
+                "id": "generalization",
+                "desc": "说明通用性/适用场景（泛化说明）",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 6/2 个信号：适用, 场景, 兼容, windows, macos, linux",
+                "skipped": false
+              }
+            ]
+          },
+          "executable": {
+            "id": "executable",
+            "label": "可执行",
+            "label_en": "Executable",
+            "raw": 1.0,
+            "rating": "pass",
+            "icon": "✅",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "runnable_artifact",
+                "desc": "包含可运行代码 / 可安装 .skill 包 / 明确 workflow",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 4/1 个信号：```, def , import , 运行",
+                "skipped": false
+              },
+              {
+                "id": "skill_package_complete",
+                "desc": ".skill 包结构完整（含 SKILL.md 与脚本/参考）",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": null,
+                "evidence": "跳过（包内无 .skill/.zip 文件）",
+                "skipped": true
+              },
+              {
+                "id": "no_syntax_error",
+                "desc": "Python 代码无语法错误（负向信号）",
+                "kind": "must_avoid",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "检出 0 处负向信号（无，合规）",
+                "skipped": false
+              },
+              {
+                "id": "io_contract",
+                "desc": "定义了输入/输出契约或命令用法",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 5/2 个信号：输入, 输出, 参数, argument, -o ",
+                "skipped": false
+              }
+            ]
+          },
+          "verifiable": {
+            "id": "verifiable",
+            "label": "可验证",
+            "label_en": "Verifiable",
+            "raw": 1.0,
+            "rating": "pass",
+            "icon": "✅",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "test_or_example",
+                "desc": "有测试用例 / 示例 / demo 结果",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 2/2 个信号：测试, 示例",
+                "skipped": false
+              },
+              {
+                "id": "expected_result",
+                "desc": "定义了预期结果 / 成功标准",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 5/1 个信号：预期, 预期结果, 成功, 标准, 结果",
+                "skipped": false
+              },
+              {
+                "id": "runnable_evidence",
+                "desc": "给出了可复现的运行证据（命令 + 输出）",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 5/2 个信号：$ , python , === , ✓, 通过",
+                "skipped": false
+              }
+            ]
+          },
+          "clear_io": {
+            "id": "clear_io",
+            "label": "IO 明确",
+            "label_en": "Clear I/O",
+            "raw": 1.0,
+            "rating": "pass",
+            "icon": "✅",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "io_oneliner",
+                "desc": "存在『输入X，输出Y』一句话描述（正则）",
+                "kind": "pattern",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "正则命中 5 处，例：'输入…输出…'",
+                "skipped": false
+              },
+              {
+                "id": "input_type",
+                "desc": "明确说明了输入类型/格式",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 4/1 个信号：输入, 参数, 路径, 文件",
+                "skipped": false
+              },
+              {
+                "id": "output_type",
+                "desc": "明确说明了输出类型/格式",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 4/1 个信号：输出, output, 生成, 文件",
+                "skipped": false
+              }
+            ]
+          }
+        },
+        "quality_score": 4.0,
+        "llm_notes": [],
+        "syntax_errors": []
+      },
+      "composite": 0.92,
+      "versions": [
+        1,
+        2
+      ],
+      "latest_version": 2,
+      "suggestions": [
+        "**补齐缺失文件**：Demo（视频/截图） —— 这是完整性硬门槛，直接决定能否进入质量评审。"
+      ]
+    },
+    {
+      "author": "liqiang",
+      "n_files": 3,
+      "files": [
+        {
+          "path": "liqiang_C4_AI日志.md",
+          "ext": ".md",
+          "size_kb": 0.1,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "liqiang_C4_clean_downloads.py",
+          "ext": ".py",
+          "size_kb": 0.6,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "liqiang_C4_skill说明.md",
+          "ext": ".md",
+          "size_kb": 0.2,
+          "modified": "2026-10-05",
+          "version": 1
+        }
+      ],
+      "author_method": [
+        "filename_prefix"
+      ],
+      "completeness": {
+        "slots": {
+          "skill_doc": {
+            "label": "Skill 说明文档",
+            "present": true,
+            "matched_file": "liqiang_C4_skill说明.md",
+            "confidence": 3
+          },
+          "executable_content": {
+            "label": "可执行内容",
+            "present": true,
+            "matched_file": "liqiang_C4_clean_downloads.py",
+            "confidence": 2
+          },
+          "demo": {
+            "label": "Demo（视频/截图）",
+            "present": false,
+            "matched_file": null,
+            "confidence": 0
+          },
+          "teaching_doc": {
+            "label": "教学说明",
+            "present": false,
+            "matched_file": null,
+            "confidence": 0
+          },
+          "ai_log": {
+            "label": "AI 日志",
+            "present": true,
+            "matched_file": "liqiang_C4_AI日志.md",
+            "confidence": 3
+          }
+        },
+        "present": 3,
+        "total": 5,
+        "status": "partial",
+        "score": 0.6,
+        "missing": [
+          "Demo（视频/截图）",
+          "教学说明"
+        ],
+        "low_confidence": []
+      },
+      "quality": {
+        "criteria": {
+          "reusable": {
+            "id": "reusable",
+            "label": "可复用",
+            "label_en": "Reusable",
+            "raw": 0.29,
+            "rating": "fail",
+            "icon": "❌",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "install_instructions",
+                "desc": "文档包含安装/使用步骤说明",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 0.0,
+                "evidence": "未命中任何信号",
+                "skipped": false
+              },
+              {
+                "id": "no_hardcoded_env",
+                "desc": "不含作者本机绝对路径 / 硬编码凭证（负向信号）",
+                "kind": "must_avoid",
+                "weight": 1.0,
+                "score": 0.6599999999999999,
+                "evidence": "检出 1 处负向信号：/Users/",
+                "skipped": false
+              },
+              {
+                "id": "env_requirements",
+                "desc": "声明环境/依赖要求",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 0.0,
+                "evidence": "未命中任何信号",
+                "skipped": false
+              },
+              {
+                "id": "generalization",
+                "desc": "说明通用性/适用场景（泛化说明）",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 0.5,
+                "evidence": "命中 1/2 个信号：场景",
+                "skipped": false
+              }
+            ]
+          },
+          "executable": {
+            "id": "executable",
+            "label": "可执行",
+            "label_en": "Executable",
+            "raw": 1.0,
+            "rating": "pass",
+            "icon": "✅",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "runnable_artifact",
+                "desc": "包含可运行代码 / 可安装 .skill 包 / 明确 workflow",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 2/1 个信号：def , import ",
+                "skipped": false
+              },
+              {
+                "id": "skill_package_complete",
+                "desc": ".skill 包结构完整（含 SKILL.md 与脚本/参考）",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": null,
+                "evidence": "跳过（包内无 .skill/.zip 文件）",
+                "skipped": true
+              },
+              {
+                "id": "no_syntax_error",
+                "desc": "Python 代码无语法错误（负向信号）",
+                "kind": "must_avoid",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "检出 0 处负向信号（无，合规）",
+                "skipped": false
+              },
+              {
+                "id": "io_contract",
+                "desc": "定义了输入/输出契约或命令用法",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 2/2 个信号：输入, 输出",
+                "skipped": false
+              }
+            ]
+          },
+          "verifiable": {
+            "id": "verifiable",
+            "label": "可验证",
+            "label_en": "Verifiable",
+            "raw": 0.1667,
+            "rating": "fail",
+            "icon": "❌",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "test_or_example",
+                "desc": "有测试用例 / 示例 / demo 结果",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 0.0,
+                "evidence": "未命中任何信号",
+                "skipped": false
+              },
+              {
+                "id": "expected_result",
+                "desc": "定义了预期结果 / 成功标准",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 0.0,
+                "evidence": "未命中任何信号",
+                "skipped": false
+              },
+              {
+                "id": "runnable_evidence",
+                "desc": "给出了可复现的运行证据（命令 + 输出）",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 0.5,
+                "evidence": "命中 1/2 个信号：=== ",
+                "skipped": false
+              }
+            ]
+          },
+          "clear_io": {
+            "id": "clear_io",
+            "label": "IO 明确",
+            "label_en": "Clear I/O",
+            "raw": 1.0,
+            "rating": "pass",
+            "icon": "✅",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "io_oneliner",
+                "desc": "存在『输入X，输出Y』一句话描述（正则）",
+                "kind": "pattern",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "正则命中 2 处，例：'输入…输出…'",
+                "skipped": false
+              },
+              {
+                "id": "input_type",
+                "desc": "明确说明了输入类型/格式",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 4/1 个信号：输入, 文件夹路径, 路径, 文件",
+                "skipped": false
+              },
+              {
+                "id": "output_type",
+                "desc": "明确说明了输出类型/格式",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 3/1 个信号：输出, 生成, 文件",
+                "skipped": false
+              }
+            ]
+          }
+        },
+        "quality_score": 2.0,
+        "llm_notes": [],
+        "syntax_errors": []
+      },
+      "composite": 0.54,
+      "versions": [
+        1
+      ],
+      "latest_version": 1,
+      "suggestions": [
+        "**补齐缺失文件**：Demo（视频/截图）、教学说明 —— 这是完整性硬门槛，直接决定能否进入质量评审。",
+        "**加强「可复用」**（当前 ❌）：最弱子项是「文档包含安装/使用步骤说明」——未命中任何信号。",
+        "**加强「可验证」**（当前 ❌）：最弱子项是「有测试用例 / 示例 / demo 结果」——未命中任何信号。"
+      ]
+    },
+    {
+      "author": "lsa",
+      "n_files": 14,
+      "files": [
+        {
+          "path": "lsa_C4_AAR.md",
+          "ext": ".md",
+          "size_kb": 5.7,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "lsa_C4_AI日志.md",
+          "ext": ".md",
+          "size_kb": 6.5,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "lsa_C4_demo.html",
+          "ext": ".html",
+          "size_kb": 13.2,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "lsa_C4_demo.png",
+          "ext": ".png",
+          "size_kb": 163.1,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "lsa_C4_demo_dark.html",
+          "ext": ".html",
+          "size_kb": 13.2,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "lsa_C4_skill说明.md",
+          "ext": ".md",
+          "size_kb": 6.1,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "lsa_C4_slide-forge.skill",
+          "ext": ".skill",
+          "size_kb": 15.3,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "lsa_C4_教学说明.md",
+          "ext": ".md",
+          "size_kb": 5.7,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "slide-forge/examples/sample-outline.md",
+          "ext": ".md",
+          "size_kb": 2.7,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "slide-forge/README.md",
+          "ext": ".md",
+          "size_kb": 2.2,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "slide-forge/references/prompt-templates.md",
+          "ext": ".md",
+          "size_kb": 2.0,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "slide-forge/references/slide-design-guide.md",
+          "ext": ".md",
+          "size_kb": 2.5,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "slide-forge/scripts/build_slides.py",
+          "ext": ".py",
+          "size_kb": 17.1,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "slide-forge/SKILL.md",
+          "ext": ".md",
+          "size_kb": 5.3,
+          "modified": "2026-10-05",
+          "version": 1
+        }
+      ],
+      "author_method": [
+        "filename_prefix",
+        "package_member"
+      ],
+      "completeness": {
+        "slots": {
+          "skill_doc": {
+            "label": "Skill 说明文档",
+            "present": true,
+            "matched_file": "lsa_C4_skill说明.md",
+            "confidence": 3
+          },
+          "executable_content": {
+            "label": "可执行内容",
+            "present": true,
+            "matched_file": "lsa_C4_slide-forge.skill",
+            "confidence": 3
+          },
+          "demo": {
+            "label": "Demo（视频/截图）",
+            "present": true,
+            "matched_file": "lsa_C4_demo.html",
+            "confidence": 3
+          },
+          "teaching_doc": {
+            "label": "教学说明",
+            "present": true,
+            "matched_file": "lsa_C4_教学说明.md",
+            "confidence": 3
+          },
+          "ai_log": {
+            "label": "AI 日志",
+            "present": true,
+            "matched_file": "lsa_C4_AI日志.md",
+            "confidence": 3
+          }
+        },
+        "present": 5,
+        "total": 5,
+        "status": "complete",
+        "score": 1.0,
+        "missing": [],
+        "low_confidence": []
+      },
+      "quality": {
+        "criteria": {
+          "reusable": {
+            "id": "reusable",
+            "label": "可复用",
+            "label_en": "Reusable",
+            "raw": 1.0,
+            "rating": "pass",
+            "icon": "✅",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "install_instructions",
+                "desc": "文档包含安装/使用步骤说明",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 5/2 个信号：安装, install, pip install, 使用步骤, 快速开始",
+                "skipped": false
+              },
+              {
+                "id": "no_hardcoded_env",
+                "desc": "不含作者本机绝对路径 / 硬编码凭证（负向信号）",
+                "kind": "must_avoid",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "检出 0 处负向信号（无，合规）",
+                "skipped": false
+              },
+              {
+                "id": "env_requirements",
+                "desc": "声明环境/依赖要求",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 5/1 个信号：依赖, python 3, node, 零依赖, 标准库",
+                "skipped": false
+              },
+              {
+                "id": "generalization",
+                "desc": "说明通用性/适用场景（泛化说明）",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 9/2 个信号：适用, 通用, 场景, 兼容, windows, macos",
+                "skipped": false
+              }
+            ]
+          },
+          "executable": {
+            "id": "executable",
+            "label": "可执行",
+            "label_en": "Executable",
+            "raw": 1.0,
+            "rating": "pass",
+            "icon": "✅",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "runnable_artifact",
+                "desc": "包含可运行代码 / 可安装 .skill 包 / 明确 workflow",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 8/1 个信号：```, def , class , import , .skill, workflow",
+                "skipped": false
+              },
+              {
+                "id": "skill_package_complete",
+                "desc": ".skill 包结构完整（含 SKILL.md 与脚本/参考）",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 5/2 个信号：SKILL.md, scripts/, references/, name:, description:",
+                "skipped": false
+              },
+              {
+                "id": "no_syntax_error",
+                "desc": "Python 代码无语法错误（负向信号）",
+                "kind": "must_avoid",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "检出 0 处负向信号（无，合规）",
+                "skipped": false
+              },
+              {
+                "id": "io_contract",
+                "desc": "定义了输入/输出契约或命令用法",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 6/2 个信号：输入, 输出, 参数, argument, 返回, -o ",
+                "skipped": false
+              }
+            ]
+          },
+          "verifiable": {
+            "id": "verifiable",
+            "label": "可验证",
+            "label_en": "Verifiable",
+            "raw": 1.0,
+            "rating": "pass",
+            "icon": "✅",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "test_or_example",
+                "desc": "有测试用例 / 示例 / demo 结果",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 8/2 个信号：测试, test, 示例, example, demo, 样例",
+                "skipped": false
+              },
+              {
+                "id": "expected_result",
+                "desc": "定义了预期结果 / 成功标准",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 6/1 个信号：预期, 成功, 标准, 结果, 应, 核对",
+                "skipped": false
+              },
+              {
+                "id": "runnable_evidence",
+                "desc": "给出了可复现的运行证据（命令 + 输出）",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 4/2 个信号：python , === , ✓, 通过",
+                "skipped": false
+              }
+            ]
+          },
+          "clear_io": {
+            "id": "clear_io",
+            "label": "IO 明确",
+            "label_en": "Clear I/O",
+            "raw": 1.0,
+            "rating": "pass",
+            "icon": "✅",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "io_oneliner",
+                "desc": "存在『输入X，输出Y』一句话描述（正则）",
+                "kind": "pattern",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "正则命中 71 处，例：'输入…输出…'",
+                "skipped": false
+              },
+              {
+                "id": "input_type",
+                "desc": "明确说明了输入类型/格式",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 5/1 个信号：输入, input, 参数, 路径, 文件",
+                "skipped": false
+              },
+              {
+                "id": "output_type",
+                "desc": "明确说明了输出类型/格式",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 5/1 个信号：输出, output, 返回, 生成, 文件",
+                "skipped": false
+              }
+            ]
+          }
+        },
+        "quality_score": 4.0,
+        "llm_notes": [],
+        "syntax_errors": []
+      },
+      "composite": 1.0,
+      "versions": [
+        1
+      ],
+      "latest_version": 1,
+      "suggestions": [
+        "四个条件全部 ✅，建议补充更多真实使用案例、提升被使用次数（C4 第一评判标准）。"
+      ]
+    },
+    {
+      "author": "zhangwei",
+      "n_files": 6,
+      "files": [
+        {
+          "path": "zhangwei_C4_AI日志.md",
+          "ext": ".md",
+          "size_kb": 0.4,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "zhangwei_C4_demo.html",
+          "ext": ".html",
+          "size_kb": 0.4,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "zhangwei_C4_demo.png",
+          "ext": ".png",
+          "size_kb": 0.6,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "zhangwei_C4_md2docx.py",
+          "ext": ".py",
+          "size_kb": 1.5,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "zhangwei_C4_skill说明.md",
+          "ext": ".md",
+          "size_kb": 1.1,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "zhangwei_C4_教学说明.md",
+          "ext": ".md",
+          "size_kb": 0.7,
+          "modified": "2026-10-05",
+          "version": 1
+        }
+      ],
+      "author_method": [
+        "filename_prefix"
+      ],
+      "completeness": {
+        "slots": {
+          "skill_doc": {
+            "label": "Skill 说明文档",
+            "present": true,
+            "matched_file": "zhangwei_C4_skill说明.md",
+            "confidence": 3
+          },
+          "executable_content": {
+            "label": "可执行内容",
+            "present": true,
+            "matched_file": "zhangwei_C4_md2docx.py",
+            "confidence": 2
+          },
+          "demo": {
+            "label": "Demo（视频/截图）",
+            "present": true,
+            "matched_file": "zhangwei_C4_demo.html",
+            "confidence": 3
+          },
+          "teaching_doc": {
+            "label": "教学说明",
+            "present": true,
+            "matched_file": "zhangwei_C4_教学说明.md",
+            "confidence": 3
+          },
+          "ai_log": {
+            "label": "AI 日志",
+            "present": true,
+            "matched_file": "zhangwei_C4_AI日志.md",
+            "confidence": 3
+          }
+        },
+        "present": 5,
+        "total": 5,
+        "status": "complete",
+        "score": 1.0,
+        "missing": [],
+        "low_confidence": []
+      },
+      "quality": {
+        "criteria": {
+          "reusable": {
+            "id": "reusable",
+            "label": "可复用",
+            "label_en": "Reusable",
+            "raw": 1.0,
+            "rating": "pass",
+            "icon": "✅",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "install_instructions",
+                "desc": "文档包含安装/使用步骤说明",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 4/2 个信号：安装, install, pip install, 使用步骤",
+                "skipped": false
+              },
+              {
+                "id": "no_hardcoded_env",
+                "desc": "不含作者本机绝对路径 / 硬编码凭证（负向信号）",
+                "kind": "must_avoid",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "检出 0 处负向信号（无，合规）",
+                "skipped": false
+              },
+              {
+                "id": "env_requirements",
+                "desc": "声明环境/依赖要求",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 3/1 个信号：环境要求, 依赖, python 3",
+                "skipped": false
+              },
+              {
+                "id": "generalization",
+                "desc": "说明通用性/适用场景（泛化说明）",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 6/2 个信号：适用, 场景, 兼容, windows, macos, linux",
+                "skipped": false
+              }
+            ]
+          },
+          "executable": {
+            "id": "executable",
+            "label": "可执行",
+            "label_en": "Executable",
+            "raw": 1.0,
+            "rating": "pass",
+            "icon": "✅",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "runnable_artifact",
+                "desc": "包含可运行代码 / 可安装 .skill 包 / 明确 workflow",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 4/1 个信号：```, def , import , 运行",
+                "skipped": false
+              },
+              {
+                "id": "skill_package_complete",
+                "desc": ".skill 包结构完整（含 SKILL.md 与脚本/参考）",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": null,
+                "evidence": "跳过（包内无 .skill/.zip 文件）",
+                "skipped": true
+              },
+              {
+                "id": "no_syntax_error",
+                "desc": "Python 代码无语法错误（负向信号）",
+                "kind": "must_avoid",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "检出 0 处负向信号（无，合规）",
+                "skipped": false
+              },
+              {
+                "id": "io_contract",
+                "desc": "定义了输入/输出契约或命令用法",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 4/2 个信号：输入, 输出, argument, -o ",
+                "skipped": false
+              }
+            ]
+          },
+          "verifiable": {
+            "id": "verifiable",
+            "label": "可验证",
+            "label_en": "Verifiable",
+            "raw": 1.0,
+            "rating": "pass",
+            "icon": "✅",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "test_or_example",
+                "desc": "有测试用例 / 示例 / demo 结果",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 2/2 个信号：示例, demo",
+                "skipped": false
+              },
+              {
+                "id": "expected_result",
+                "desc": "定义了预期结果 / 成功标准",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 4/1 个信号：预期, 成功, 标准, 结果",
+                "skipped": false
+              },
+              {
+                "id": "runnable_evidence",
+                "desc": "给出了可复现的运行证据（命令 + 输出）",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 5/2 个信号：$ , python , === , ✓, 通过",
+                "skipped": false
+              }
+            ]
+          },
+          "clear_io": {
+            "id": "clear_io",
+            "label": "IO 明确",
+            "label_en": "Clear I/O",
+            "raw": 1.0,
+            "rating": "pass",
+            "icon": "✅",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "io_oneliner",
+                "desc": "存在『输入X，输出Y』一句话描述（正则）",
+                "kind": "pattern",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "正则命中 4 处，例：'输入…输出…'",
+                "skipped": false
+              },
+              {
+                "id": "input_type",
+                "desc": "明确说明了输入类型/格式",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 5/1 个信号：输入, input, 文件夹路径, 路径, 文件",
+                "skipped": false
+              },
+              {
+                "id": "output_type",
+                "desc": "明确说明了输出类型/格式",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 5/1 个信号：输出, output, 生成, 报告, 文件",
+                "skipped": false
+              }
+            ]
+          }
+        },
+        "quality_score": 4.0,
+        "llm_notes": [],
+        "syntax_errors": []
+      },
+      "composite": 1.0,
+      "versions": [
+        1
+      ],
+      "latest_version": 1,
+      "suggestions": [
+        "四个条件全部 ✅，建议补充更多真实使用案例、提升被使用次数（C4 第一评判标准）。"
+      ]
+    },
+    {
+      "author": "zhaolei",
+      "n_files": 2,
+      "files": [
+        {
+          "path": "zhaolei_C4_skill说明.md",
+          "ext": ".md",
+          "size_kb": 0.1,
+          "modified": "2026-10-05",
+          "version": 1
+        },
+        {
+          "path": "zhaolei_C4_summarize.py",
+          "ext": ".py",
+          "size_kb": 0.2,
+          "modified": "2026-10-05",
+          "version": 1
+        }
+      ],
+      "author_method": [
+        "filename_prefix"
+      ],
+      "completeness": {
+        "slots": {
+          "skill_doc": {
+            "label": "Skill 说明文档",
+            "present": true,
+            "matched_file": "zhaolei_C4_skill说明.md",
+            "confidence": 3
+          },
+          "executable_content": {
+            "label": "可执行内容",
+            "present": true,
+            "matched_file": "zhaolei_C4_summarize.py",
+            "confidence": 2
+          },
+          "demo": {
+            "label": "Demo（视频/截图）",
+            "present": false,
+            "matched_file": null,
+            "confidence": 0
+          },
+          "teaching_doc": {
+            "label": "教学说明",
+            "present": false,
+            "matched_file": null,
+            "confidence": 0
+          },
+          "ai_log": {
+            "label": "AI 日志",
+            "present": false,
+            "matched_file": null,
+            "confidence": 0
+          }
+        },
+        "present": 2,
+        "total": 5,
+        "status": "insufficient",
+        "score": 0.4,
+        "missing": [
+          "Demo（视频/截图）",
+          "教学说明",
+          "AI 日志"
+        ],
+        "low_confidence": []
+      },
+      "quality": {
+        "criteria": {
+          "reusable": {
+            "id": "reusable",
+            "label": "可复用",
+            "label_en": "Reusable",
+            "raw": 0.375,
+            "rating": "partial",
+            "icon": "⚠️",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "install_instructions",
+                "desc": "文档包含安装/使用步骤说明",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 0.0,
+                "evidence": "未命中任何信号",
+                "skipped": false
+              },
+              {
+                "id": "no_hardcoded_env",
+                "desc": "不含作者本机绝对路径 / 硬编码凭证（负向信号）",
+                "kind": "must_avoid",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "检出 0 处负向信号（无，合规）",
+                "skipped": false
+              },
+              {
+                "id": "env_requirements",
+                "desc": "声明环境/依赖要求",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 0.0,
+                "evidence": "未命中任何信号",
+                "skipped": false
+              },
+              {
+                "id": "generalization",
+                "desc": "说明通用性/适用场景（泛化说明）",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 0.5,
+                "evidence": "命中 1/2 个信号：场景",
+                "skipped": false
+              }
+            ]
+          },
+          "executable": {
+            "id": "executable",
+            "label": "可执行",
+            "label_en": "Executable",
+            "raw": 0.8333,
+            "rating": "pass",
+            "icon": "✅",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "runnable_artifact",
+                "desc": "包含可运行代码 / 可安装 .skill 包 / 明确 workflow",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 2/1 个信号：def , import ",
+                "skipped": false
+              },
+              {
+                "id": "skill_package_complete",
+                "desc": ".skill 包结构完整（含 SKILL.md 与脚本/参考）",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": null,
+                "evidence": "跳过（包内无 .skill/.zip 文件）",
+                "skipped": true
+              },
+              {
+                "id": "no_syntax_error",
+                "desc": "Python 代码无语法错误（负向信号）",
+                "kind": "must_avoid",
+                "weight": 1.0,
+                "score": 0.5,
+                "evidence": "检出 1 处负向信号：__SYNTAX_ERROR__",
+                "skipped": false
+              },
+              {
+                "id": "io_contract",
+                "desc": "定义了输入/输出契约或命令用法",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 2/2 个信号：输入, 输出",
+                "skipped": false
+              }
+            ]
+          },
+          "verifiable": {
+            "id": "verifiable",
+            "label": "可验证",
+            "label_en": "Verifiable",
+            "raw": 0.1667,
+            "rating": "fail",
+            "icon": "❌",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "test_or_example",
+                "desc": "有测试用例 / 示例 / demo 结果",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 0.0,
+                "evidence": "未命中任何信号",
+                "skipped": false
+              },
+              {
+                "id": "expected_result",
+                "desc": "定义了预期结果 / 成功标准",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 0.0,
+                "evidence": "未命中任何信号",
+                "skipped": false
+              },
+              {
+                "id": "runnable_evidence",
+                "desc": "给出了可复现的运行证据（命令 + 输出）",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 0.5,
+                "evidence": "命中 1/2 个信号：=== ",
+                "skipped": false
+              }
+            ]
+          },
+          "clear_io": {
+            "id": "clear_io",
+            "label": "IO 明确",
+            "label_en": "Clear I/O",
+            "raw": 1.0,
+            "rating": "pass",
+            "icon": "✅",
+            "weight": 0.25,
+            "rules": [
+              {
+                "id": "io_oneliner",
+                "desc": "存在『输入X，输出Y』一句话描述（正则）",
+                "kind": "pattern",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "正则命中 2 处，例：'输入…输出…'",
+                "skipped": false
+              },
+              {
+                "id": "input_type",
+                "desc": "明确说明了输入类型/格式",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 1/1 个信号：输入",
+                "skipped": false
+              },
+              {
+                "id": "output_type",
+                "desc": "明确说明了输出类型/格式",
+                "kind": "must_have",
+                "weight": 1.0,
+                "score": 1.0,
+                "evidence": "命中 1/1 个信号：输出",
+                "skipped": false
+              }
+            ]
+          }
+        },
+        "quality_score": 2.5,
+        "llm_notes": [],
+        "syntax_errors": [
+          "zhaolei_C4_summarize.py"
+        ]
+      },
+      "composite": 0.535,
+      "versions": [
+        1
+      ],
+      "latest_version": 1,
+      "suggestions": [
+        "**补齐缺失文件**：Demo（视频/截图）、教学说明、AI 日志 —— 这是完整性硬门槛，直接决定能否进入质量评审。",
+        "**加强「可复用」**（当前 ⚠️）：最弱子项是「文档包含安装/使用步骤说明」——未命中任何信号。",
+        "**加强「可验证」**（当前 ❌）：最弱子项是「有测试用例 / 示例 / demo 结果」——未命中任何信号。",
+        "**修复语法错误**：zhaolei_C4_summarize.py 无法通过 py_compile，评审器已扣分。"
+      ]
+    }
+  ],
+  "non_c4": []
+}

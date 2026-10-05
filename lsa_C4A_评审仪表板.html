@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<title>C4 提交自动评审 · 班级仪表板</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#1a2233;--mut:#6b7688;--line:#e3e8f0;--pri:#3b5bdb;--ok:#2f9e44;--warn:#e8a020;--bad:#e03131}
+*{box-sizing:border-box}body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);padding:36px}
+.wrap{max-width:1080px;margin:0 auto}
+h1{font-size:26px;margin:0 0 6px}.sub{color:var(--mut);font-size:13px;margin-bottom:24px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.kpi .v{font-size:26px;font-weight:700;color:var(--pri)}.kpi .l{font-size:12px;color:var(--mut);margin-top:4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:20px}
+h2{font-size:16px;margin:0 0 14px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left}
+th{color:var(--mut);font-weight:600;font-size:12px;background:#fafbfe}
+.rk{color:var(--mut)}.au{font-weight:700}.cs{font-weight:700;color:var(--pri)}
+.ic{font-size:14px}.ms{color:var(--bad);font-size:12px}
+.bar{display:flex;align-items:center;gap:12px;margin:8px 0}
+.bl{width:90px;font-size:13px;color:var(--mut)}.track{flex:1;height:10px;background:#eef1f7;border-radius:6px;overflow:hidden}
+.fill{height:100%;background:linear-gradient(90deg,#4c6ef5,#748ffc)}.pv{width:44px;text-align:right;font-size:13px;font-weight:600}
+</style></head><body><div class="wrap">
+<h1>C4 提交自动评审 · 班级仪表板</h1>
+<div class="sub">c4a-evaluator v1.0 ｜ 纯规则（确定性） ｜ 生成于 2026-10-05 12:03:34 ｜ 扫描 30 个文件</div>
+<div class="kpis">
+  <div class="kpi"><div class="v">5</div><div class="l">提交人数</div></div>
+  <div class="kpi"><div class="v">2</div><div class="l">完整提交 5/5</div></div>
+  <div class="kpi"><div class="v">3.3<span style="font-size:15px;color:var(--mut)">/4</span></div><div class="l">平均质量分</div></div>
+  <div class="kpi"><div class="v">40%</div><div class="l">完整率</div></div>
+</div>
+<div class="card"><h2>四条件通过率</h2><div class="bar"><div class="bl">可复用</div>
+          <div class="track"><div class="fill" style="width:60%"></div></div><div class="pv">60%</div></div><div class="bar"><div class="bl">可执行</div>
+          <div class="track"><div class="fill" style="width:100%"></div></div><div class="pv">100%</div></div><div class="bar"><div class="bl">可验证</div>
+          <div class="track"><div class="fill" style="width:60%"></div></div><div class="pv">60%</div></div><div class="bar"><div class="bl">IO 明确</div>
+          <div class="track"><div class="fill" style="width:100%"></div></div><div class="pv">100%</div></div></div>
+<div class="card"><h2>综合排名</h2>
+<table><thead><tr><th>#</th><th>作者</th><th>完整性</th><th>质量分</th><th>综合分</th><th>可复用/可执行/可验证/IO</th><th>缺失</th></tr></thead>
+<tbody><tr>
+          <td class="rk">1</td><td class="au">lsa</td>
+          <td>5/5</td>
+          <td>4.0/4</td>
+          <td class="cs">1.0</td><td class="ics"><span class='ic'>✅</span><span class='ic'>✅</span><span class='ic'>✅</span><span class='ic'>✅</span></td>
+          <td class="ms">—</td></tr><tr>
+          <td class="rk">2</td><td class="au">zhangwei</td>
+          <td>5/5</td>
+          <td>4.0/4</td>
+          <td class="cs">1.0</td><td class="ics"><span class='ic'>✅</span><span class='ic'>✅</span><span class='ic'>✅</span><span class='ic'>✅</span></td>
+          <td class="ms">—</td></tr><tr>
+          <td class="rk">3</td><td class="au">chenyu</td>
+          <td>4/5</td>
+          <td>4.0/4</td>
+          <td class="cs">0.92</td><td class="ics"><span class='ic'>✅</span><span class='ic'>✅</span><span class='ic'>✅</span><span class='ic'>✅</span></td>
+          <td class="ms">Demo（视频/截图）</td></tr><tr>
+          <td class="rk">4</td><td class="au">liqiang</td>
+          <td>3/5</td>
+          <td>2.0/4</td>
+          <td class="cs">0.54</td><td class="ics"><span class='ic'>❌</span><span class='ic'>✅</span><span class='ic'>❌</span><span class='ic'>✅</span></td>
+          <td class="ms">Demo（视频/截图）、教学说明</td></tr><tr>
+          <td class="rk">5</td><td class="au">zhaolei</td>
+          <td>2/5</td>
+          <td>2.5/4</td>
+          <td class="cs">0.535</td><td class="ics"><span class='ic'>⚠️</span><span class='ic'>✅</span><span class='ic'>❌</span><span class='ic'>✅</span></td>
+          <td class="ms">Demo（视频/截图）、教学说明、AI 日志</td></tr></tbody></table></div>
+<div class="card"><h2>说明</h2><p style="font-size:13px;color:var(--mut);line-height:1.7">
+综合分 = 完整性 × 0.4 + 质量分(归一) × 0.6。
+评级：✅ 达标 / ⚠️ 部分 / ❌ 缺失。全部判定均附证据，规则口径见 references/rubric.yaml。
+本页面为可选可视化输出，与 Markdown / Excel 报告同源。</p></div>
+</div></body></html>

@@ -1,0 +1,14 @@
+{
+  "pass": 68,
+  "fail": 0,
+  "failed": [],
+  "metrics": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "accuracy": 1.0,
+    "tp": 4,
+    "fp": 0,
+    "tn": 8,
+    "fn": 0
+  }
+}

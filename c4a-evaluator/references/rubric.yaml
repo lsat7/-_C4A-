@@ -1,0 +1,214 @@
+# =============================================================================
+# c4a-evaluator — Rule Rubric (Machine-Readable, v1.0)
+# 单一事实来源：所有阈值/权重/信号都定义在这里，代码不硬编码任何阈值。
+# 修改此文件即可调整评审口径，无需改代码（详见 方案设计.md §4.3）。
+# =============================================================================
+meta:
+  version: "1.0"
+  challenge: C4A
+  rubric_total_points: 100
+  note: >
+    本文件是 c4a-evaluator 的评分口径唯一来源。规则的 kind 字段决定打分模型：
+    must_have（命中数/总数，按 min_hits 分档给分 0 / key_partial / 1）；
+    must_avoid（未命中则满分，命中则按 penalize_each 递减，下限 0，用于负向信号）；
+    pattern（正则或关键词，命中=满分，否则 0）；
+    count（达到 min_hits 即满分，否则按 hits/min_hits 线性给分）；
+    ai_assisted（规则无法可靠判定，交由 LLM 或人工，默认给 leniency 分并标记待复核）。
+  scoring: >
+    维度原始分 raw = Σ(权重 × 规则得分)，规则得分属于 [0,1]；raw 映射为
+    pass (>= pass_threshold) / partial (>= partial_threshold) / fail。
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# L2 完整性：C4 五件必交文件
+# -----------------------------------------------------------------------------
+completeness:
+  skill_doc:
+    label_cn: "Skill 说明文档"
+    filename_patterns: ["skill说明", "skill_doc", "skill-doc", "skill_description", "skill文档"]
+    content_signals: ["使用场景", "输入", "输出", "解决什么问题", "use case"]
+    extensions: [".md", ".pdf", ".docx", ".txt"]
+  executable_content:
+    label_cn: "可执行内容"
+    filename_patterns: ["技能", "skill", "代码", "script", "源码"]
+    extensions: [".skill", ".py", ".zip", ".md", ".js", ".sh"]
+    content_signals: ["```", "def ", "class ", "import ", "name:"]
+  demo:
+    label_cn: "Demo（视频/截图）"
+    filename_patterns: ["demo", "演示", "截图", "screen", "录屏", "preview"]
+    extensions: [".mp4", ".mov", ".webm", ".png", ".jpg", ".jpeg", ".gif"]
+  teaching_doc:
+    label_cn: "教学说明"
+    filename_patterns: ["教学说明", "教学", "tutorial", "teaching", "上手指南", "quickstart", "how-to", "上手"]
+    content_signals: ["上手", "步骤", "常见坑", "安装", "注意事项", "getting started"]
+    extensions: [".md", ".pdf", ".docx", ".txt"]
+  ai_log:
+    label_cn: "AI 日志"
+    filename_patterns: ["AI日志", "AI_log", "ai-log", "ai_日志", "AI使用"]
+    content_signals: ["使用的 AI", "AI 工具", "prompt", "迭代", "ChatGPT", "Claude", "DeepSeek"]
+    extensions: [".md", ".pdf", ".docx", ".txt"]
+
+# -----------------------------------------------------------------------------
+# L3 质量：C4 四条件
+# -----------------------------------------------------------------------------
+quality_criteria:
+  reusable:
+    label_cn: "可复用"
+    label_en: "Reusable"
+    weight: 0.25
+    pass_threshold: 0.6667      # raw >= 2/3 → ✅
+    partial_threshold: 0.3334   # raw >= 1/3 → ⚠️
+    rules:
+      - id: install_instructions
+        kind: must_have
+        weight: 1.0
+        description: "文档包含安装/使用步骤说明"
+        signals: ["安装", "install", "pip install", "npm install", "使用方法", "使用步骤", "快速开始", "quickstart", "getting started"]
+        min_hits: 2
+        key_partial: 0.5
+      - id: no_hardcoded_env
+        kind: must_avoid
+        weight: 1.0
+        description: "不含作者本机绝对路径 / 硬编码凭证（负向信号）"
+        signals: ["/Users/", "/home/", "C:\\", "D:\\", "我的电脑", "api_key =", "api_key=", "sk-", "password =", "token ="]
+        penalize_each: 0.34
+      - id: env_requirements
+        kind: must_have
+        weight: 1.0
+        description: "声明环境/依赖要求"
+        signals: ["环境要求", "requirements", "dependencies", "依赖", "python 3", "node", "运行环境", "无第三方", "零依赖", "标准库"]
+        min_hits: 1
+        key_partial: 0.5
+      - id: generalization
+        kind: must_have
+        weight: 1.0
+        description: "说明通用性/适用场景（泛化说明）"
+        signals: ["适用", "通用", "场景", "兼容", "compatible", "跨平台", "windows", "macos", "linux", "任何", "任意"]
+        min_hits: 2
+        key_partial: 0.5
+
+  executable:
+    label_cn: "可执行"
+    label_en: "Executable"
+    weight: 0.25
+    pass_threshold: 0.6667
+    partial_threshold: 0.3334
+    rules:
+      - id: runnable_artifact
+        kind: must_have
+        weight: 1.0
+        description: "包含可运行代码 / 可安装 .skill 包 / 明确 workflow"
+        signals: ["```", "def ", "class ", "import ", ".skill", "workflow", "pipeline", "运行", "执行"]
+        min_hits: 1
+        key_partial: 0.5
+      - id: skill_package_complete
+        kind: must_have
+        weight: 1.0
+        description: ".skill 包结构完整（含 SKILL.md 与脚本/参考）"
+        signals: ["SKILL.md", "scripts/", "references/", "name:", "description:"]
+        min_hits: 2
+        key_partial: 0.5
+        only_if_present: [".skill", ".zip"]
+      - id: no_syntax_error
+        kind: must_avoid
+        weight: 1.0
+        description: "Python 代码无语法错误（负向信号）"
+        signals: ["__SYNTAX_ERROR__"]     # 由代码静态检查注入
+        penalize_each: 0.5
+      - id: io_contract
+        kind: must_have
+        weight: 1.0
+        description: "定义了输入/输出契约或命令用法"
+        signals: ["输入", "输出", "keyword", "usage", "参数", "argument", "接受", "返回", "-o "]
+        min_hits: 2
+        key_partial: 0.5
+
+  verifiable:
+    label_cn: "可验证"
+    label_en: "Verifiable"
+    weight: 0.25
+    pass_threshold: 0.6667
+    partial_threshold: 0.3334
+    rules:
+      - id: test_or_example
+        kind: must_have
+        weight: 1.0
+        description: "有测试用例 / 示例 / demo 结果"
+        signals: ["测试", "test", "示例", "example", "demo", "样例", "实测", "sample"]
+        min_hits: 2
+        key_partial: 0.5
+      - id: expected_result
+        kind: must_have
+        weight: 1.0
+        description: "定义了预期结果 / 成功标准"
+        signals: ["预期", "expected", "预期结果", "成功", "标准", "结果", "输出为", "应", "核对"]
+        min_hits: 1
+        key_partial: 0.5
+      - id: runnable_evidence
+        kind: must_have
+        weight: 1.0
+        description: "给出了可复现的运行证据（命令 + 输出）"
+        signals: ["$ ", "python ", "npm ", "运行结果", "输出如下", "=== ", "✓", "通过"]
+        min_hits: 2
+        key_partial: 0.5
+
+  clear_io:
+    label_cn: "IO 明确"
+    label_en: "Clear I/O"
+    weight: 0.25
+    pass_threshold: 0.6667
+    partial_threshold: 0.3334
+    rules:
+      - id: io_oneliner
+        kind: pattern
+        weight: 1.0
+        description: "存在『输入X，输出Y』一句话描述（正则）"
+        pattern: "输入.{0,60}输出|input.{0,60}output|接受.{0,40}返回|给定.{0,40}得到|→"
+        min_hits: 1
+      - id: input_type
+        kind: must_have
+        weight: 1.0
+        description: "明确说明了输入类型/格式"
+        signals: ["输入", "input", "接受", "参数", "文件夹路径", "路径", "文件"]
+        min_hits: 1
+        key_partial: 0.5
+      - id: output_type
+        kind: must_have
+        weight: 1.0
+        description: "明确说明了输出类型/格式"
+        signals: ["输出", "output", "返回", "生成", "produces", "returns", "报告", "文件"]
+        min_hits: 1
+        key_partial: 0.5
+
+# -----------------------------------------------------------------------------
+# 综合评分（L4 排名）
+# -----------------------------------------------------------------------------
+composite:
+  formula: "composite = completeness_score * completeness_weight + quality_score * quality_weight"
+  completeness_weight: 0.4
+  quality_weight: 0.6
+  # 可选维度权重（默认按 C4 四条件等权，可配置）
+  criteria_weights:
+    reusable: 0.25
+    executable: 0.25
+    verifiable: 0.25
+    clear_io: 0.25
+
+# -----------------------------------------------------------------------------
+# 版本追踪
+# -----------------------------------------------------------------------------
+version_tracking:
+  version_pattern: "_v(\\d+)"
+  compare_by: "author"
+
+# -----------------------------------------------------------------------------
+# 边界处理
+# -----------------------------------------------------------------------------
+limits:
+  max_content_chars_per_file: 200000   # 超大/超长文本截断
+  skip_content_over_kb: 50000          # >50MB 仅做文件名/类型匹配
+  # 纯二进制：不读正文，仅按文件名/扩展名匹配（图片/视频/压缩包等）
+  binary_extensions: [".png", ".jpg", ".jpeg", ".gif", ".mp4", ".mov", ".webm", ".zip", ".skill", ".xlsx", ".pptx"]
+  # 富文本：虽是二进制容器，但经提取层（python-docx / pypdf，缺失时 .docx 走标准库兜底）
+  # 可读到正文，故**参与内容级检测**（对应挑战 L92/L106/L109–110）。
+  rich_text_extensions: [".docx", ".pdf"]
